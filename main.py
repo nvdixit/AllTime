@@ -68,20 +68,25 @@ def twenty_four_times():
 @app.route("/twelve_times")
 def twelve_times():
     now = datetime.now()
-    current_time_12 = now.strftime("%I:%M:%S")
-    all_times["EST"] = current_time_12
+    current_time_24 = now.strftime("%H:%M:%S")
 
-    gmt_hour = (int(current_time_12.split(":")[0]) + CONST_EST_GMT_DIFF) % HOUR_COUNT_ONE
-    minute = str(current_time_12.split(":")[1])
-    second = str(current_time_12.split(":")[2])
+    gmt_hour = (int(current_time_24.split(":")[0]) + CONST_EST_GMT_DIFF) % HOUR_COUNT_ONE
+    minute = str(current_time_24.split(":")[1])
+    second = str(current_time_24.split(":")[2])
 
     count = 0
     for key in all_times:
-        final_time = str((gmt_hour + count) % HOUR_COUNT_TWO) + ":" + minute + ":" + second
+        final_time = str((gmt_hour + count) % HOUR_COUNT_ONE) + ":" + minute + ":" + second
+        hour = gmt_hour + count % HOUR_COUNT_ONE
 
         if DAYLIGHT_SAVINGS:
             if key.__eq__("PST") | key.__eq__("MST") | key.__eq__("CST") | key.__eq__("EST"):
-                final_time = str((gmt_hour + count + 1) % HOUR_COUNT_ONE) + ":" + minute + ":" + second
+                hour += 1
+
+        if hour > 12:
+            final_time = str(hour % 12) + ":" + minute + ":" + second + " PM"
+        else:
+            final_time = str(hour) + ":" + minute + second + " AM"
 
         all_times[key] = final_time
         count += 1
