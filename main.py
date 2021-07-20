@@ -8,6 +8,18 @@ HOUR_COUNT_TWO = 12
 DAYLIGHT_SAVINGS = True
 
 all_times = {
+    "MIT": "",
+    "HST": "",
+    "AST": "",
+    "PST": "",
+    "MST": "",
+    "CST": "",
+    "EST": "",
+    "PRT": "",
+    "CNT": "",
+    "AGT": "",
+    "GST": "",
+    "CAT": "",
     "GMT": "",
     "ECT": "",
     "EET": "",
@@ -20,19 +32,7 @@ all_times = {
     "JST": "",
     "AET": "",
     "SST": "",
-    "NST": "",
-    "MIT": "",
-    "HST": "",
-    "AST": "",
-    "PST": "",
-    "MST": "",
-    "CST": "",
-    "EST": "",
-    "PRT": "",
-    "CNT": "",
-    "AGT": "",
-    "GST": "",
-    "CAT": ""
+    "NST": ""
 }
 
 
@@ -51,7 +51,7 @@ def twenty_four_times():
     minute = str(current_time_24.split(":")[1])
     second = str(current_time_24.split(":")[2])
 
-    count = 0
+    count = -12
     for key in all_times:
         final_time = str((gmt_hour + count) % HOUR_COUNT_ONE) + ":" + minute + ":" + second
 
@@ -74,19 +74,22 @@ def twelve_times():
     minute = str(current_time_24.split(":")[1])
     second = str(current_time_24.split(":")[2])
 
-    count = 0
+    count = -12
     for key in all_times:
-        final_time = str((gmt_hour + count) % HOUR_COUNT_ONE) + ":" + minute + ":" + second
-        hour = gmt_hour + count % HOUR_COUNT_ONE
+        final_time = ""
+        hour = gmt_hour + count
 
         if DAYLIGHT_SAVINGS:
             if key.__eq__("PST") | key.__eq__("MST") | key.__eq__("CST") | key.__eq__("EST"):
                 hour += 1
 
-        if hour > 12:
+        if hour >= 12:
             final_time = str(hour % 12) + ":" + minute + ":" + second + " PM"
         else:
-            final_time = str(hour) + ":" + minute + second + " AM"
+            if hour == 0:
+                final_time = "12" + ":" + minute + ":" + second + " AM"
+            else:
+                final_time = str(hour) + ":" + minute + ":" + second + " AM"
 
         all_times[key] = final_time
         count += 1
