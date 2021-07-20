@@ -1,5 +1,5 @@
 from datetime import datetime
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 app = Flask(__name__)
 
 CONST_EST_GMT_DIFF = 5
@@ -95,6 +95,33 @@ def twelve_times():
         count += 1
 
     return jsonify(all_times)
+
+
+@app.route("/request_time/<time_zone>")
+def request_time(time_zone):
+    now = datetime.now()
+    current_time_24 = now.strftime("%H:%M:%S")
+
+    gmt_hour = (int(current_time_24.split(":")[0]) + CONST_EST_GMT_DIFF) % HOUR_COUNT_ONE
+    minute = str(current_time_24.split(":")[1])
+    second = str(current_time_24.split(":")[2])
+
+    count = -12
+    for key in all_times:
+        final_time = str((gmt_hour + count) % HOUR_COUNT_ONE) + ":" + minute + ":" + second
+
+        if DAYLIGHT_SAVINGS:
+            if key.__eq__("PST") | key.__eq__("MST") | key.__eq__("CST") | key.__eq__("EST"):
+                final_time = str((gmt_hour + count + 1) % HOUR_COUNT_ONE) + ":" + minute + ":" + second
+
+        all_times[key] = final_time
+
+        if key.__eq__(time_zone):
+            return jsonify({key: all_times[key]})
+
+        count += 1
+
+    return "Invalid time zone"
 
 
 if __name__ == '__main__':
