@@ -1,6 +1,6 @@
 from datetime import datetime
 from flask import Flask, jsonify, request
-app = Flask(__name__)
+application = Flask(__name__)
 
 CONST_EST_GMT_DIFF = 5
 HOUR_COUNT_ONE = 24
@@ -36,13 +36,13 @@ all_times = {
 }
 
 
-@app.route("/")
+@application.route("/")
 def base_return():
     return "If you're seeing this message, it means you've got the right URL, but not a valid endpoint. " \
            "Head back to the docs page to find valid endpoints"
 
 
-@app.route("/twenty_four_times")
+@application.route("/twenty_four_times")
 def twenty_four_times():
     now = datetime.now()
     current_time_24 = now.strftime("%H:%M:%S")
@@ -65,7 +65,7 @@ def twenty_four_times():
     return jsonify(all_times)
 
 
-@app.route("/twelve_times")
+@application.route("/twelve_times")
 def twelve_times():
     now = datetime.now()
     current_time_24 = now.strftime("%H:%M:%S")
@@ -97,7 +97,7 @@ def twelve_times():
     return jsonify(all_times)
 
 
-@app.route("/request_time_24/<time_zone>")
+@application.route("/request_time_24/<time_zone>")
 def request_time_24(time_zone):
     now = datetime.now()
     current_time_24 = now.strftime("%H:%M:%S")
@@ -124,7 +124,7 @@ def request_time_24(time_zone):
     return "Invalid time zone"
 
 
-@app.route("/request_time_12/<time_zone>")
+@application.route("/request_time_12/<time_zone>")
 def request_time_12(time_zone):
     now = datetime.now()
     current_time_24 = now.strftime("%H:%M:%S")
@@ -161,4 +161,4 @@ def request_time_12(time_zone):
 
 
 if __name__ == '__main__':
-    app.run()
+    application.run()
