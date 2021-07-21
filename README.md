@@ -72,11 +72,11 @@ https://alltime-us.com/twelve_times - Returns a JSON of current time in every ti
 3:
 https://alltime-us.com/request_time_24/TIMEZONE - Returns the current 24-hour time in the requested TIMEZONE
 For example: 
-https://alltime-us.com/request_time_24/MIT would return {"CST": "00:00:00"}
-https://alltime-us.com/request_time_24/HST would return {"EAT": "01:00:00"}
+https://alltime-us.com/request_time_24/MIT would return {"MIT": "00:00:00"}
+https://alltime-us.com/request_time_24/HST would return {"HST": "01:00:00"}
 
 4:
 https://alltime-us.com/request_time_12/TIMEZONE - Returns the current 12-hour time in the requested TIMEZONE
 For example: 
-https://alltime-us.com/request_time_12/PST would return {"CST": "00:00:00 AM"}
+https://alltime-us.com/request_time_12/PST would return {"PST": "00:00:00 AM"}
 https://alltime-us.com/request_time_12/EAT would return {"EAT": "01:00:00 AM"}
