@@ -1,6 +1,6 @@
 # AllTime Documentation
 
-Welcome to Alltime! A RESTful service that returns the current time in every (or one) time zone on Earth. 
+Welcome to AllTime! A RESTful service that returns the current time in every (or one) time zone on Earth. 
 To get started, here is the base URL of the API: https://alltime-us.com/
 
 After the base URL, add on one of the following extensions:
