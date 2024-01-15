@@ -72,13 +72,13 @@ DEPRECATED/twelve_times - Returns a JSON of current time in every time zone on E
 3:
 DEPRECATED/request_time_24/TIMEZONE - Returns the current 24-hour time in the requested TIMEZONE
 For example: 
-https://alltime-us.com/request_time_24/MIT would return {"MIT": "00:00:00"}
-https://alltime-us.com/request_time_24/HST would return {"HST": "01:00:00"}
+DEPRECATED/request_time_24/MIT would return {"MIT": "00:00:00"}
+DEPRECATED/request_time_24/HST would return {"HST": "01:00:00"}
 
 4:
 DEPRECATED/request_time_12/TIMEZONE - Returns the current 12-hour time in the requested TIMEZONE
 For example: 
-https://alltime-us.com/request_time_12/PST would return {"PST": "00:00:00 AM"}
-https://alltime-us.com/request_time_12/EAT would return {"EAT": "01:00:00 AM"}
+DEPRECATED/request_time_12/PST would return {"PST": "00:00:00 AM"}
+DEPRECATED/request_time_12/EAT would return {"EAT": "01:00:00 AM"}
 
 List of time zones adapted from https://publib.boulder.ibm.com/tividd/td/TWS/SC32-1274-02/en_US/HTML/SRF_mst273.htm
